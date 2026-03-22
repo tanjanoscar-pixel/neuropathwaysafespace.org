@@ -12,10 +12,10 @@ const Footer = () => {
             <div className="flex items-center space-x-2 mb-4">
               <img 
                 src="https://neuropathwaysafespace.org/images/neuropathway-safe-space-logo.png" 
-                alt="NeuroPathway" 
+                alt="Safe Space" 
                 className="h-8 w-8"
               />
-              <span className="font-bold text-lg text-[#0a1628]">NeuroPathway</span>
+              <span className="font-bold text-lg text-[#0a1628]">Safe Space</span>
             </div>
             <p className="text-sm text-gray-600 mb-3">
               Prevention Is the Cure. Connecting families, schools, and healthcare for neurodivergent support.
@@ -89,7 +89,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="text-center text-sm text-gray-500">
-          <p>© {new Date().getFullYear()} NeuroPathway Eco-System. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Safe Space Eco-System. All rights reserved.</p>
           <p className="mt-2">
             <a href="mailto:hello@neuropathwaysafespace.org" className="text-cyan-600 hover:text-cyan-700">
               hello@neuropathwaysafespace.org

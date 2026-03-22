@@ -78,13 +78,13 @@ const Register = () => {
           <div className="flex justify-center mb-4">
             <img 
               src="https://neuropathwaysafespace.org/images/neuropathway-safe-space-logo.png" 
-              alt="NeuroPathway Logo" 
+              alt="Safe Space Logo" 
               className="h-16 w-16"
             />
           </div>
           <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
           <CardDescription className="text-center">
-            Join NeuroPathway Safe Space
+            Join Safe Space
           </CardDescription>
         </CardHeader>
         <CardContent>

@@ -23,7 +23,7 @@ export const PrivacyPolicy = () => (
       <div>
         <h2 className="text-2xl font-semibold mb-4">GDPR Compliance</h2>
         <p className="mb-4">
-          NeuroPathway Safe Space is committed to protecting your privacy and ensuring GDPR compliance. 
+          Safe Space is committed to protecting your privacy and ensuring GDPR compliance. 
           We collect and process personal data only with your explicit consent and in accordance with 
           UK data protection laws.
         </p>
@@ -50,7 +50,7 @@ export const Terms = () => (
     content={
       <div>
         <p className="mb-4">
-          By using NeuroPathway Safe Space, you agree to these terms of service.
+          By using Safe Space, you agree to these terms of service.
         </p>
         <h3 className="text-xl font-semibold mb-2">Acceptable Use</h3>
         <p className="mb-4">
@@ -73,7 +73,7 @@ export const Safeguarding = () => (
     content={
       <div>
         <p className="mb-4">
-          Child safety is our highest priority. NeuroPathway Safe Space follows strict safeguarding protocols.
+          Child safety is our highest priority. Safe Space follows strict safeguarding protocols.
         </p>
         <h3 className="text-xl font-semibold mb-2">Child Protection</h3>
         <p className="mb-4">
@@ -97,7 +97,7 @@ export const Compliance = () => (
       <div>
         <h3 className="text-xl font-semibold mb-2">NHS Compliance</h3>
         <p className="mb-4">
-          NeuroPathway Safe Space meets NHS digital standards and clinical safety requirements.
+          Safe Space meets NHS digital standards and clinical safety requirements.
         </p>
         <h3 className="text-xl font-semibold mb-2">DCB0129 Framework</h3>
         <p className="mb-4">
@@ -118,7 +118,7 @@ export const Framework = () => (
     content={
       <div>
         <p className="mb-4">
-          NeuroPathway Safe Space is built on established healthcare and educational frameworks.
+          Safe Space is built on established healthcare and educational frameworks.
         </p>
         <ul className="list-disc pl-6 mb-4">
           <li>NHS Digital Technology Assessment Criteria (DTAC)</li>

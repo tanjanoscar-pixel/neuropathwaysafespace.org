@@ -5,13 +5,13 @@ const About = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-cyan-50 to-white py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-8" data-testid="about-heading">About NeuroPathway Safe Space</h1>
+        <h1 className="text-4xl font-bold text-center text-gray-900 mb-8" data-testid="about-heading">About Safe Space</h1>
         
         <Card className="mb-8">
           <CardContent className="p-8">
             <h2 className="text-2xl font-semibold text-cyan-600 mb-4">Our Mission</h2>
             <p className="text-gray-700 mb-4">
-              NeuroPathway Safe Space is an NHS-compliant digital platform designed to bridge the gap between Health Services, 
+              Safe Space is an NHS-compliant digital platform designed to bridge the gap between Health Services, 
               Education, Parents, and Justice Services for neurodivergent children and young people aged 8-17.
             </p>
             <p className="text-gray-700 mb-4">
@@ -45,7 +45,7 @@ const About = () => {
           <CardContent className="p-8">
             <h2 className="text-2xl font-semibold text-cyan-600 mb-4">Created by Tania Hanson</h2>
             <p className="text-gray-700">
-              NeuroPathway Safe Space was created to address the fragmented systems and long wait times that cause 
+              Safe Space was created to address the fragmented systems and long wait times that cause 
               neurodivergent children to deteriorate while waiting for support. Our platform is NHS-compliant, GDPR-compliant, 
               and designed with child safety at its core.
             </p>

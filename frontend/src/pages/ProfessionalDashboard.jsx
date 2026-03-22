@@ -142,10 +142,27 @@ const ProfessionalDashboard = () => {
                 Analyze Patterns
               </Button>
               {patterns && (
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 max-h-96 overflow-y-auto">
                   <p className="font-semibold mb-2">Analysis Results:</p>
-                  <p className="text-sm text-gray-700">{patterns.patterns?.substring(0, 200)}...</p>
-                  <div className="mt-2">
+                  
+                  {/* Data Summary */}
+                  <div className="grid grid-cols-3 gap-2 mb-3 text-center">
+                    <div className="bg-white p-2 rounded">
+                      <p className="text-xs text-gray-600">Assessments</p>
+                      <p className="text-lg font-bold text-cyan-600">{patterns.total_assessments || 0}</p>
+                    </div>
+                    <div className="bg-white p-2 rounded">
+                      <p className="text-xs text-gray-600">Chat Messages</p>
+                      <p className="text-lg font-bold text-teal-600">{patterns.chat_interactions || 0}</p>
+                    </div>
+                    <div className="bg-white p-2 rounded">
+                      <p className="text-xs text-gray-600">Evidence</p>
+                      <p className="text-lg font-bold text-orange-600">{patterns.evidence_count || 0}</p>
+                    </div>
+                  </div>
+
+                  {/* Risk Level Badge */}
+                  <div className="mb-3">
                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
                       patterns.risk_level === 'red' ? 'bg-red-200 text-red-800' :
                       patterns.risk_level === 'amber' ? 'bg-orange-200 text-orange-800' :
@@ -154,6 +171,50 @@ const ProfessionalDashboard = () => {
                       Risk Level: {patterns.risk_level?.toUpperCase()}
                     </span>
                   </div>
+
+                  {/* Insights */}
+                  {patterns.insights && patterns.insights.length > 0 && (
+                    <div className="mb-3">
+                      <p className="text-xs font-semibold mb-1">Key Insights:</p>
+                      <ul className="text-xs space-y-1">
+                        {patterns.insights.map((insight, i) => (
+                          <li key={i} className="bg-white p-2 rounded">{insight}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Mood Distribution */}
+                  {patterns.mood_distribution && (
+                    <div className="mb-3">
+                      <p className="text-xs font-semibold mb-1">Mood Distribution:</p>
+                      <div className="grid grid-cols-5 gap-1 text-xs text-center">
+                        <div className="bg-yellow-100 p-1 rounded">
+                          <p className="font-semibold">{patterns.mood_distribution.happy || 0}</p>
+                          <p>Happy</p>
+                        </div>
+                        <div className="bg-blue-100 p-1 rounded">
+                          <p className="font-semibold">{patterns.mood_distribution.sad || 0}</p>
+                          <p>Sad</p>
+                        </div>
+                        <div className="bg-purple-100 p-1 rounded">
+                          <p className="font-semibold">{patterns.mood_distribution.anxious || 0}</p>
+                          <p>Anxious</p>
+                        </div>
+                        <div className="bg-red-100 p-1 rounded">
+                          <p className="font-semibold">{patterns.mood_distribution.angry || 0}</p>
+                          <p>Angry</p>
+                        </div>
+                        <div className="bg-gray-100 p-1 rounded">
+                          <p className="font-semibold">{patterns.mood_distribution.confused || 0}</p>
+                          <p>Confused</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* AI Analysis */}
+                  <p className="text-sm text-gray-700">{patterns.patterns?.substring(0, 300)}...</p>
                 </div>
               )}
             </CardContent>

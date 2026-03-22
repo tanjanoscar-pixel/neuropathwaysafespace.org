@@ -22,10 +22,10 @@ const Navigation = () => {
           <Link to="/" className="flex items-center space-x-3">
             <img 
               src="https://neuropathwaysafespace.org/images/neuropathway-safe-space-logo.png" 
-              alt="NeuroPathway Logo" 
+              alt="Safe Space Logo" 
               className="h-10 w-10"
             />
-            <span className="font-bold text-lg text-[#0a1628]">NeuroPathway</span>
+            <span className="font-bold text-lg text-[#0a1628]">Safe Space</span>
           </Link>
 
           {/* Desktop Navigation */}

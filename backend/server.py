@@ -166,6 +166,18 @@ class EmotionalSupportResponse(BaseModel):
     crisis_level: str  # low, medium, high
 
 
+class ChatMessage(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    message: str
+    mood: Optional[str] = None
+    ai_response: str
+    crisis_level: str
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
 # ==================== HELPER FUNCTIONS ====================
 
 def hash_password(password: str) -> str:
@@ -612,6 +624,21 @@ async def emotional_support(
         if crisis_level == "high":
             resources.insert(0, "EMERGENCY: Call 999 or go to A&E immediately")
         
+        # Store chat message in database for pattern recognition
+        chat_message = ChatMessage(
+            user_id=current_user["id"],
+            message=request.message,
+            mood=request.mood,
+            ai_response=ai_response,
+            crisis_level=crisis_level
+        )
+        
+        chat_dict = chat_message.model_dump()
+        chat_dict['timestamp'] = chat_dict['timestamp'].isoformat()
+        await db.chat_messages.insert_one(chat_dict)
+        
+        logger.info(f"Stored chat message for user {current_user['id']} with crisis level: {crisis_level}")
+        
         return {
             "response": ai_response,
             "resources": resources,
@@ -637,33 +664,97 @@ async def analyze_patterns(user_id: str, current_user: Dict = Depends(get_curren
         # Get all questionnaires for user
         questionnaires = await db.questionnaires.find({"user_id": user_id}, {"_id": 0}).to_list(100)
         
-        if not questionnaires:
-            return {"patterns": [], "insights": "No data available yet"}
+        # Get all chat messages (Safe Space interactions)
+        chat_messages = await db.chat_messages.find({"user_id": user_id}, {"_id": 0}).to_list(100)
         
-        # AI pattern recognition
-        data_summary = {
-            "total_responses": len(questionnaires),
-            "types": [q.get('questionnaire_type') for q in questionnaires],
-            "recent_responses": questionnaires[:5]
-        }
+        # Get all evidence
+        evidence = await db.evidence.find({"user_id": user_id}, {"_id": 0}).to_list(50)
         
+        if not questionnaires and not chat_messages and not evidence:
+            return {
+                "patterns": "No data available yet for this child.",
+                "total_assessments": 0,
+                "chat_interactions": 0,
+                "evidence_count": 0,
+                "risk_level": "unknown",
+                "insights": []
+            }
+        
+        # Prepare comprehensive data for AI analysis
+        mood_trends = [msg.get('mood') for msg in chat_messages if msg.get('mood')]
+        crisis_levels = [msg.get('crisis_level') for msg in chat_messages]
+        recent_messages = [msg.get('message', '')[:100] for msg in chat_messages[-10:]]
+        
+        # Calculate risk level based on data
+        high_crisis_count = crisis_levels.count('high')
+        medium_crisis_count = crisis_levels.count('medium')
+        
+        if high_crisis_count > 2:
+            risk_level = "red"
+        elif high_crisis_count > 0 or medium_crisis_count > 3:
+            risk_level = "amber"
+        else:
+            risk_level = "green"
+        
+        # AI pattern recognition with comprehensive data
         prompt = f"""
-        Analyze behavior patterns and trends from questionnaire data:
-        {data_summary}
+        Analyze comprehensive behavior patterns for a child aged 8-17:
         
-        Identify:
-        1. Recurring themes
-        2. Risk indicators (Red/Amber/Green)
-        3. Positive progress markers
-        4. Intervention recommendations
+        QUESTIONNAIRE DATA:
+        - Total questionnaires: {len(questionnaires)}
+        - Types: {[q.get('questionnaire_type') for q in questionnaires]}
+        - Recent responses: {questionnaires[:3] if questionnaires else 'None'}
+        
+        SAFE SPACE CHAT DATA:
+        - Total interactions: {len(chat_messages)}
+        - Mood trends: {mood_trends[-10:] if mood_trends else 'No mood data'}
+        - Crisis levels: High: {high_crisis_count}, Medium: {medium_crisis_count}
+        - Recent messages themes: {recent_messages}
+        
+        EVIDENCE DATA:
+        - Total evidence records: {len(evidence)}
+        - Recent observations: {[e.get('description', '')[:80] for e in evidence[:3]]}
+        
+        CALCULATED RISK LEVEL: {risk_level.upper()}
+        
+        Provide:
+        1. Recurring behavioral patterns
+        2. Emotional wellbeing trends
+        3. Risk indicators and concerns
+        4. Positive progress markers
+        5. Specific intervention recommendations
+        6. Recommended support strategies
+        
+        Focus on actionable insights for professionals.
         """
         
         patterns = await analyze_with_ai(prompt, context="pattern_recognition")
         
+        # Extract key insights
+        insights = []
+        if high_crisis_count > 0:
+            insights.append(f"⚠️ {high_crisis_count} high-crisis interactions detected - immediate review recommended")
+        if medium_crisis_count > 3:
+            insights.append(f"⚡ {medium_crisis_count} medium-level concerns identified")
+        if len(chat_messages) > 20:
+            insights.append("✅ High engagement with Safe Space platform")
+        if mood_trends and mood_trends.count('Sad') > mood_trends.count('Happy'):
+            insights.append("📊 Mood trend showing more negative emotions")
+        
         return {
             "patterns": patterns,
             "total_assessments": len(questionnaires),
-            "risk_level": "amber"  # Would be determined by AI analysis
+            "chat_interactions": len(chat_messages),
+            "evidence_count": len(evidence),
+            "risk_level": risk_level,
+            "insights": insights,
+            "mood_distribution": {
+                "happy": mood_trends.count('Happy') if mood_trends else 0,
+                "sad": mood_trends.count('Sad') if mood_trends else 0,
+                "anxious": mood_trends.count('Anxious') if mood_trends else 0,
+                "angry": mood_trends.count('Angry') if mood_trends else 0,
+                "confused": mood_trends.count('Confused') if mood_trends else 0
+            }
         }
     except Exception as e:
         logger.error(f"Pattern analysis error: {e}")
