@@ -19,13 +19,12 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center">
             <img 
               src="https://neuropathwaysafespace.org/images/neuropathway-safe-space-logo.png" 
               alt="Safe Space Logo" 
               className="h-12 w-12"
             />
-            <span className="font-bold text-xl text-[#0a1628]">Safe Space</span>
           </Link>
 
           {/* Desktop Navigation */}
