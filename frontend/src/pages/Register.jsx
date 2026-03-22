@@ -79,7 +79,7 @@ const Register = () => {
             <img 
               src="https://neuropathwaysafespace.org/images/neuropathway-safe-space-logo.png" 
               alt="Safe Space Logo" 
-              className="h-16 w-16"
+              className="h-20 w-20"
             />
           </div>
           <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>

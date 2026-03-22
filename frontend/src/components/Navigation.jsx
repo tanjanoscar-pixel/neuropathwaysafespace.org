@@ -23,9 +23,9 @@ const Navigation = () => {
             <img 
               src="https://neuropathwaysafespace.org/images/neuropathway-safe-space-logo.png" 
               alt="Safe Space Logo" 
-              className="h-10 w-10"
+              className="h-12 w-12"
             />
-            <span className="font-bold text-lg text-[#0a1628]">Safe Space</span>
+            <span className="font-bold text-xl text-[#0a1628]">Safe Space</span>
           </Link>
 
           {/* Desktop Navigation */}

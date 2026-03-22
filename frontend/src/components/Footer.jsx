@@ -13,9 +13,9 @@ const Footer = () => {
               <img 
                 src="https://neuropathwaysafespace.org/images/neuropathway-safe-space-logo.png" 
                 alt="Safe Space" 
-                className="h-8 w-8"
+                className="h-10 w-10"
               />
-              <span className="font-bold text-lg text-[#0a1628]">Safe Space</span>
+              <span className="font-bold text-xl text-[#0a1628]">Safe Space</span>
             </div>
             <p className="text-sm text-gray-600 mb-3">
               Prevention Is the Cure. Connecting families, schools, and healthcare for neurodivergent support.

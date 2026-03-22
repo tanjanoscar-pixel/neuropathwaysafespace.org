@@ -17,7 +17,7 @@ const Home = () => {
               <img 
                 src="https://neuropathwaysafespace.org/images/neuropathway-safe-space-logo.png" 
                 alt="Safe Space Logo" 
-                className="h-32 w-32 mx-auto"
+                className="h-40 w-40 mx-auto"
               />
             </div>
           </div>
