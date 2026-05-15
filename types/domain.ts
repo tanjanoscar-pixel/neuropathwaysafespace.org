@@ -33,6 +33,13 @@ export interface Observation {
   occurredAt: string;
   sourceRole: UserRole;
   safeguardingConcern?: boolean;
+  environment?: string;
+  emotionalState?: string;
+  trigger?: string;
+  supportAttempted?: string;
+  outcome?: string;
+  frequency?: string;
+  professionalInvolvement?: string;
 }
 
 export interface RiskScore {

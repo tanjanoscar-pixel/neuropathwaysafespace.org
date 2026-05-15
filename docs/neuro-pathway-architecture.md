@@ -74,6 +74,11 @@ Recommended Next.js route handlers:
 | Route | Method | Purpose |
 | --- | --- | --- |
 | `/api/observations` | `GET`, `POST` | List and create observations after consent and role checks |
+| `/api/ai/observations/analyse` | `POST` | Return the required NeuroPathway JSON structure: observation summary, patterns, needs, evidence strength, supports, missing information, professional summary, and risk flags |
+| `/api/ai/ehcp-evidence` | `POST` | Convert observations into EHCP-ready evidence domains with functional impact wording |
+| `/api/ai/risk-review` | `POST` | Review self-harm, suicidal language, absconding, exploitation, crisis, aggression, neglect, and medication indicators |
+| `/api/ai/journal` | `POST` | Analyse Safe Space journal tone, stress indicators, protective factors, support suggestions, and escalation warning |
+| `/api/ai/agents` | `POST` | Run specialist agent outputs for Risk, Observation, EHCP, Parent Support, Clinical Summary, and Safeguarding |
 | `/api/journal` | `GET`, `POST` | Safe Space journal entries and summaries |
 | `/api/mood-logs` | `GET`, `POST` | Mood tracker history and daily submissions |
 | `/api/risk/analyse` | `POST` | Calculate deterministic risk and request AI pattern narrative |
@@ -87,7 +92,7 @@ All API routes must enforce authentication, RBAC, consent, audit logging, input 
 
 ## 6. AI prompt templates
 
-Prompt templates live in `lib/ai-prompts.ts` and cover:
+Prompt templates live in `lib/ai-prompts.ts`, while deterministic structured output helpers live in `lib/neuro-ai-analysis.ts`. The NeuroPathway AI system prompt requires non-diagnostic, trauma-informed, safeguarding-prioritised JSON output with eight mandatory sections: Observation Summary, Patterns Identified, Possible Areas of Need, Evidence Strength, Recommended Supports, Missing Information, Professional Summary, and Risk Flags. The templates cover:
 
 - Observation summaries.
 - Behavioural pattern detection.
@@ -96,6 +101,7 @@ Prompt templates live in `lib/ai-prompts.ts` and cover:
 - Safeguarding concern highlighting.
 - Parent-friendly summaries.
 - Clinician-friendly summaries.
+- Multi-agent collaboration between Risk Agent, Observation Agent, EHCP Agent, Parent Support Agent, Clinical Summary Agent, and Safeguarding Agent.
 
 AI outputs must be treated as drafts. The UI should display evidence IDs, confidence, limitations, and a professional review requirement.
 
@@ -109,7 +115,7 @@ The deterministic baseline risk engine is in `lib/risk-scoring.ts`. It calculate
 - Thirty-day recurring pattern boosts.
 - Safeguarding and self-harm escalation factors.
 
-This creates an explainable score before any AI narrative is generated, which supports auditability and avoids opaque triage.
+This creates an explainable score before any AI narrative is generated, which supports auditability and avoids opaque triage. Safeguarding review additionally categorises concerns as `low`, `moderate`, `high`, or `urgent_safeguarding_concern` and explains why each flag was triggered.
 
 ## 8. EHCP report generation logic
 
@@ -128,6 +134,11 @@ The final production flow should include professional review, version history, e
 
 ```text
 app/
+  api/ai/agents/route.ts
+  api/ai/ehcp-evidence/route.ts
+  api/ai/journal/route.ts
+  api/ai/observations/analyse/route.ts
+  api/ai/risk-review/route.ts
   commissioner/page.tsx
   dashboard/page.tsx
   globals.css
@@ -143,10 +154,12 @@ components/
 lib/
   ai-prompts.ts
   ehcp-report.ts
+  neuro-ai-analysis.ts
   risk-scoring.ts
   supabase.ts
 types/
   domain.ts
+  neuro-ai.ts
 supabase/
   schema.sql
 docs/
