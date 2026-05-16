@@ -14,6 +14,7 @@ Created by **Tanja Hanson**, Founder of NeuroPathway, from lived experience and 
 - Landing page, professional dashboard, Safe Space page, observations page, EHCP reports page, and commissioner analytics page.
 - Initial deterministic risk scoring logic and EHCP report section generation.
 - AI prompt templates and deterministic structured JSON helpers for evidence summaries, pattern detection, EHCP evidence, safeguarding, stakeholder summaries, journal review, trend analysis, and specialist agents.
+- Security, privacy, GDPR, safeguarding, incident response, and penetration-testing hardening guidance in `docs/security-compliance.md`.
 
 ## Product modules
 
@@ -42,7 +43,7 @@ Open `http://localhost:3000`.
 3. Configure private storage buckets for documents, voice notes, Safe Space media, and report exports.
 4. Add Supabase and OpenAI credentials to `.env.local` and Vercel.
 
-See `docs/neuro-pathway-architecture.md` for architecture, API routes, NeuroPathway AI prompt governance, compliance planning, MVP roadmap, testing strategy, and commercial roadmap.
+See `docs/neuro-pathway-architecture.md` for architecture, API routes, NeuroPathway AI prompt governance, compliance planning, MVP roadmap, testing strategy, and commercial roadmap. See `docs/security-compliance.md` for the security risk assessment, GDPR checklist, safeguarding checklist, incident response plan, and penetration-testing plan.
 
 ## Legacy prototype
 

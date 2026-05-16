@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "check:neuro-ai": "node scripts/check-neuro-ai-contract.mjs"
+    "check:neuro-ai": "node scripts/check-neuro-ai-contract.mjs",
+    "check:security": "node scripts/check-security-contract.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

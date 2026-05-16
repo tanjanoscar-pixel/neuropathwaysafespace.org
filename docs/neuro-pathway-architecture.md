@@ -27,7 +27,7 @@ The platform is founded by **Tanja Hanson**, informed by lived experience and th
 - **AI:** OpenAI API with retrieval-augmented generation over structured evidence and document embeddings.
 - **Infrastructure:** Vercel for web deployment, Supabase for managed backend, GitHub for CI/CD.
 - **Monitoring:** Sentry for errors, PostHog for privacy-conscious product analytics.
-- **Security:** MFA, RBAC, consent management, RLS, encryption at rest and in transit, audit logs, DPIA-ready governance.
+- **Security:** MFA, RBAC, consent management, RLS, encryption at rest and in transit, audit logs, rate limiting, security headers, immutable safeguarding actions, DPIA-ready governance. Detailed hardening is documented in `docs/security-compliance.md`.
 
 ### 2.3 High-level data flow
 

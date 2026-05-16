@@ -9,6 +9,7 @@ export type UserRole =
   | "camhs_clinician"
   | "social_worker"
   | "gp_paediatrician"
+  | "local_authority_officer"
   | "administrator"
   | "commissioner";
 
