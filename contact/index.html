@@ -1,0 +1,68 @@
+---
+layout: default
+title: Get Involved
+---
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Get Involved</span>
+    <h1>Help us take this from one family's story to a plan for change</h1>
+    <p class="lede">
+      Whether you're a parent, a school, an NHS or local authority team, a
+      researcher, or just someone this story reached — we'd love to hear
+      from you.
+    </p>
+  </div>
+</section>
+
+<section class="section-narrow">
+  <div class="wrap">
+    <div class="editor-note">
+      <strong>Before this goes live:</strong> the button below opens an
+      email to <code>tanjanoscar@gmail.com</code> — swap in whichever
+      address you want the public to use. The form underneath is a
+      starting point only: GitHub Pages can't process form submissions on
+      its own, so connect it to a form service (e.g. Formspree, Basin) by
+      putting that service's endpoint in the <code>action</code> attribute,
+      or remove the form and keep just the email button.
+    </div>
+
+    <p>
+      <a class="btn btn-primary" href="mailto:tanjanoscar@gmail.com?subject=NeuroPathway%20—%20Getting%20involved">
+        Email us directly
+      </a>
+    </p>
+
+    <h2>Or send a message</h2>
+    <form class="contact-form" action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST">
+      <div>
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="email">Your email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="role">I'm reaching out as a...</label>
+        <input type="text" id="role" name="role" placeholder="Parent, school, NHS/ICB, researcher, other">
+      </div>
+      <div>
+        <label for="message">Your message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+      </div>
+      <div>
+        <button class="btn btn-primary" type="submit">Send message</button>
+      </div>
+    </form>
+
+    <div class="callout">
+      <h2>Not ready to reach out yet?</h2>
+      <p>
+        You can still help by sharing <a href="{{ '/journey/' | relative_url }}">our journey</a>
+        or <a href="{{ '/plan/' | relative_url }}">the plan for change</a> with someone
+        who needs to see it — another parent, a teacher, a decision-maker.
+      </p>
+    </div>
+  </div>
+</section>

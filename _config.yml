@@ -1,0 +1,30 @@
+title: "NeuroPathway: Our Journey, Our Plan"
+description: >-
+  A family's journey through the SEND system with our daughter — and the plan
+  we built to change it. From lived experience to NeuroPathway.
+author: Tanja Hanson
+lang: en-GB
+
+# Site navigation, used in _includes/nav.html
+nav:
+  - title: Home
+    url: /
+  - title: Our Journey
+    url: /journey/
+  - title: The Plan for Change
+    url: /plan/
+  - title: About NeuroPathway
+    url: /about/
+  - title: Get Involved
+    url: /contact/
+
+markdown: kramdown
+permalink: pretty
+
+exclude:
+  - README.md
+  - SECURITY.md
+  - v0-accessible-data-collection.htm
+  - Gemfile
+  - Gemfile.lock
+  - vendor
